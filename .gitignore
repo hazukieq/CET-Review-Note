@@ -1,0 +1,7 @@
+*.toc
+*.csv
+*.aux
+*.log
+*.txss2
+*.out
+*.synctex.gz
