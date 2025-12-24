@@ -1,0 +1,171 @@
+% ==============================
+% 包和设置
+% ==============================
+\usepackage{xeCJK}              % 支持中文字符
+\usepackage{graphicx}           % 支持插入图像
+\usepackage{enumitem}           % 自定义列表环境
+\usepackage{tabularx}           % 支持自适应宽度的表格
+\usepackage{geometry}           % 页面边距设置
+\usepackage{fancyhdr}           % 自定义页眉和页脚
+\usepackage{algorithm}           % 支持算法环境
+%\usepackage{minted}             % 支持高亮代码
+%\usepackage{listings}           % 支持代码高亮（另一种方式）
+\usepackage{xcolor}             % 支持颜色
+\usepackage{tcolorbox}          % 支持自定义彩色盒子
+\usepackage{xeCJKfntef}         % 支持中文的脚注和尾注
+\usepackage{wallpaper} % 壁纸背景设置
+\usepackage{tocloft}
+% 超链接设置
+\usepackage[
+bookmarks=true,
+colorlinks=true,
+colorlinks=true,
+linkcolor=black,
+urlcolor=red,
+citecolor=green,
+pdfstartview=fitH
+]{hyperref}                     % 支持文档内超链接
+
+% ==============================
+% 配置字体
+% ==============================
+\newCJKfontfamily{\jn}{SourceHanSerifSC-Regular.otf}[Path=./fonts/]
+
+\newCJKfontfamily{\kx}{KX.ttf}[Path=./fonts/]
+
+\newCJKfontfamily{\wk}{LXGWWenKaiMono-Regular.ttf}[Path=./fonts/]
+
+\setmainfont{SourceHanSerifSC-Regular.otf}[Path=./fonts/]
+\setCJKmainfont{SourceHanSerifSC-Regular.otf}[Path=./fonts/]
+
+% ==============================
+% 配置标题
+% ==============================
+\newcommand{\makeTitle}{
+	{\kx\zihao{1}\theTitle}
+	
+	\vspace{2em}
+	\zihao{-3}\theAuthor
+		
+	\vspace{.5em}
+	\zihao{-3}\today
+}
+
+
+% ==============================
+% 配置CTEX文档
+% ==============================
+\ctexset{
+	today=small,                % 日期格式
+	section/name={第,章},      % 节的名称
+	section/number=\chinese{section},  % 节的编号
+	section/format+=\raggedright, % 节格式
+	section/aftername=\hskip 0.5em, % 子节名称后空格
+	subsection/aftername=\hskip 0.5em, % 子节名称后空格
+	subsubsection/aftername=\hskip 0.5em, % 子子节名称后空格
+}
+
+% ==============================
+% 页面边距设置
+% ==============================
+\geometry{
+	top=2.5cm,                  % 上边距
+	bottom=2.5cm,               % 下边距
+	left=2cm,                   % 左边距
+	right=2cm                   % 右边距
+}
+
+% 行间距设置
+\setlength\headheight{52pt}   % 页眉高度
+\linespread{1.3}               % 段落间距
+
+% ==============================
+% 页眉和页脚设置
+% ==============================
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\sectionmark}[1]{\markright{\CTEXifname{\CTEXthesection}{}\ #1}}
+\renewcommand{\subsectionmark}[1]{} % 不为 subsection 设置标记
+
+
+\fancyhf{}
+\fancyhead[L]{\textnormal{\kaishu \rightmark}}
+%\fancyhead[R]{\textnormal{\kaishu \thepage}}
+\renewcommand{\headrulewidth}{.5pt} %注意不用 \setlength
+\renewcommand{\footrulewidth}{0pt}
+
+
+% ==============================
+% 目录配置
+% ==============================
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+
+
+% ==============================
+% 自定义环境
+% ==============================
+\newenvironment{pol}[1]{       % 自定义有序列表环境
+	\begin{enumerate}[topsep=0pt,labelsep=.5em,leftmargin=\the\dimexpr 0.5em+ #1\relax,itemsep=0em,parsep=0em, partopsep=0pt,label=\arabic*.]
+	}{\end{enumerate}}
+
+\newenvironment{pul}[1]{       % 自定义无序列表环境
+	\begin{itemize}[topsep=0pt,labelsep=.5em,leftmargin=\the\dimexpr 0.5em+ #1\relax,itemsep=0em,parsep=.5em]
+	}{\end{itemize}}
+
+% ==============================
+% 图像文件夹设置
+% ==============================
+\graphicspath{{./statics/}}    % 设置图像文件存放路径
+
+% ==============================
+% 自定义命令
+% ==============================
+\newcommand{\pic}[1]{           % 自定义插入图像命令
+	\begin{figure}[!h]
+		\centering
+		\includegraphics[width=4in]{#1}   % 图像宽度设置
+	\end{figure}
+}
+
+\newcommand{\fpic}[1]{          % 自定义插入带框图像命令
+	\begin{figure}[!h]
+		\centering
+		\fbox{\includegraphics[width=4.5in]{#1}} % 带框的图像
+	\end{figure}
+}
+
+\definecolor{codeBg}{HTML}{f6f8fa}  % 代码背景颜色定义
+%\newminted{bash}{bgcolor=codeBg,frame=leftline,framesep=0em,framerule=.1em,rulecolor=pink,fontsize=\normalsize}  % bash 代码高亮
+%\newminted{latex}{bgcolor=codeBg,frame=leftline,framesep=0em,framerule=.1em,rulecolor=pink,fontsize=\normalsize} % LaTeX 代码高亮
+\definecolor{yellowbg}{HTML}{FAF9DE}
+\definecolor{redbg}{HTML}{FDE6E0}
+\definecolor{spanbg}{HTML}{eeeeee}  % 其他背景颜色定义
+
+
+\newcommand{\cbox}[1]{            % 自定义彩色盒子命令
+	\tcbox[colback=spanbg, colframe=spanbg, rounded corners=all]{#1}
+}
+
+\newcommand{\emp}[1]{              % 自定义高亮命令
+	\colorbox{spanbg}{#1}
+}
+
+\newcommand{\remp}[1]{
+	\colorbox{redbg}{#1}
+}
+
+\newcommand{\yemp}[1]{
+	\colorbox{yellowbg}{#1}
+}
+
+\newcommand{\fillblank}{
+\rule[-.2pt]{3em}{.4pt}
+}
+
+\newcommand{\fillnum}[1]{
+	\underline{\makebox[2.5em]{#1}}
+}
+
+\newcommand{\rlarge}[1]{
+	\textcolor{red}{{\large #1}}
+}
